@@ -1,15 +1,17 @@
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import Filter from './Filter/Filter';
-
+import Phonebook from 'page/Phonebook/Phonebook';
+import Header from './Header/Header';
+import SignUpForm from './SignUpForm/SignUpForm';
+import { Routes, Route } from 'react-router-dom';
 const App = () => {
   return (
     <>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList />
+      <Routes>
+        <Route path="/" element={<Header />}>
+          {' '}
+          <Route index element={<Phonebook />}></Route>
+          <Route path="/register" element={<SignUpForm />} />
+        </Route>
+      </Routes>
     </>
   );
 };

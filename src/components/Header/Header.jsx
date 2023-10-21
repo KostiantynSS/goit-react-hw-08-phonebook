@@ -21,6 +21,9 @@ const Header = () => {
             <li>
               <StyledLink to={'/register'}>Sign up</StyledLink>
             </li>
+            <li>
+              <StyledLink to={'/login'}>Log in</StyledLink>
+            </li>
           </ul>
         </nav>
       </header>

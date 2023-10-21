@@ -1,21 +1,20 @@
 import { useDispatch } from 'react-redux';
 // import { selectContacts } from 'redux/slice/selectors';
-import { getNewThunk } from 'redux/slice/test';
+import { logInThunk } from 'redux/slice/test';
 
-const SignUpForm = () => {
+const LogInForm = () => {
   //   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
-    const { name, password, email } = form;
+    const { password, email } = form;
     const data = {
-      name: name.value,
       email: email.value,
       password: password.value,
     };
-    dispatch(getNewThunk(data));
+    dispatch(logInThunk(data));
 
     // form.reset();
   };
@@ -23,10 +22,6 @@ const SignUpForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name
-          <input type="text" name="name" required />
-        </label>
         <label>
           Email
           <input type="email" name="email" required />
@@ -36,10 +31,10 @@ const SignUpForm = () => {
           <input type="password" name="password" required />
         </label>
 
-        <button type="submit">Sign up</button>
+        <button type="submit">Log in</button>
       </form>
     </>
   );
 };
 
-export default SignUpForm;
+export default LogInForm;

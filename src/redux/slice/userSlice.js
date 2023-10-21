@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getNewThunk } from './test';
+import { getNewThunk, logInThunk } from './test';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -16,14 +16,20 @@ const addUserFulfilled = (state, { payload }) => {
 };
 
 const userSlice = createSlice({
-  name: 'contacts',
+  name: 'user',
   initialState: { items: [], isLoading: false, error: null, token: null },
 
   extraReducers: builder => {
     builder
       .addCase(getNewThunk.fulfilled, addUserFulfilled)
-      .addMatcher(isAnyOf(getNewThunk.pending), handlePending)
-      .addMatcher(isAnyOf(getNewThunk.rejected), handleRejected);
+      .addMatcher(
+        isAnyOf(getNewThunk.pending, logInThunk.pending),
+        handlePending
+      )
+      .addMatcher(
+        isAnyOf(getNewThunk.rejected, logInThunk.rejected),
+        handleRejected
+      );
   },
 });
 

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { selectToken } from 'redux/slice/selectors';
-import { getContactsThunk, logInThunk } from 'redux/slice/test';
+import { getContactsThunk, logInThunk } from 'redux/slice/auth';
 import { useSelector } from 'react-redux';
 
 const LogInForm = () => {

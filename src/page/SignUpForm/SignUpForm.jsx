@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 // import { selectContacts } from 'redux/slice/selectors';
-import { getNewThunk } from 'redux/slice/test';
+import { getNewThunk } from 'redux/slice/auth';
 
 const SignUpForm = () => {
   //   const contacts = useSelector(selectContacts);

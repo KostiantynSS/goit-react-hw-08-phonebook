@@ -4,7 +4,7 @@ import {
   logInThunk,
   getContactsThunk,
   addContactThunk,
-} from './test';
+} from './auth';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -13,11 +13,13 @@ const handlePending = state => {
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload.message;
+  state.isAuth = false;
 };
 const addUserFulfilled = (state, { payload }) => {
   state.isLoading = false;
   state.error = null;
   state.token = payload;
+  state.isAuth = true;
 };
 const addContactFulfilled = (state, action) => {
   state.isLoading = false;
@@ -30,6 +32,7 @@ const userSlice = createSlice({
   initialState: {
     contacts: [],
     isLoading: false,
+    isAuth: false,
     error: null,
     token: '',
   },

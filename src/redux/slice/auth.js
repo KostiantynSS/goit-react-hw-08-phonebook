@@ -4,8 +4,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 const instance = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
 });
-// instance.defaults.headers.common['Authorization'] =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMyYjE4MGU4YWY1ZjAwMTQ3M2Q2MGUiLCJpYXQiOjE2OTc4NzgzOTh9.3Ynqcqo9NELGv5QIE1VF7K318ucyCQ_PPlwT80OU2VM';
+
+instance.defaults.headers.common['Authorization'] =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMyYjE4MGU4YWY1ZjAwMTQ3M2Q2MGUiLCJpYXQiOjE2OTc5MTQzNDJ9.qigwkppBwe9FHPFCyKSpVKVQTfHHkpir0t6gxUk76Eo';
+
 export const getNewThunk = createAsyncThunk(
   'user/signUp',
   async (user, thunkAPI) => {
@@ -47,12 +49,10 @@ export const getContactsThunk = createAsyncThunk(
   }
 );
 export const addContactThunk = createAsyncThunk(
-  'contacts/addContact',
-  async (token, contact, thunkAPI) => {
+  'contacts/addContactNew',
+  async (contact, thunkAPI) => {
     try {
-      const response = await instance.post('/contacts', contact, {
-        headers: { Authorization: token },
-      });
+      const response = await instance.post('/contacts', contact);
 
       console.log(response);
       return response;

@@ -11,3 +11,4 @@ export const selectVisibleContacts = createSelector(
     );
   }
 );
+export const selectToken = state => state.user.token;

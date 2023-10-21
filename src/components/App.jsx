@@ -1,6 +1,6 @@
 import Phonebook from 'page/Phonebook/Phonebook';
 import Header from './Header/Header';
-import SignUpForm from './SignUpForm/SignUpForm';
+import SignUpForm from 'page/SignUpForm/SignUpForm';
 import { Routes, Route } from 'react-router-dom';
 import LogInForm from './LogInForm/LogInForm';
 const App = () => {

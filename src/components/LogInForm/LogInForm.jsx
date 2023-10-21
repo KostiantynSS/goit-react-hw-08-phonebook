@@ -1,9 +1,10 @@
 import { useDispatch } from 'react-redux';
-// import { selectContacts } from 'redux/slice/selectors';
-import { logInThunk } from 'redux/slice/test';
+import { selectToken } from 'redux/slice/selectors';
+import { getContactsThunk, logInThunk } from 'redux/slice/test';
+import { useSelector } from 'react-redux';
 
 const LogInForm = () => {
-  //   const contacts = useSelector(selectContacts);
+  const token = useSelector(selectToken);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -33,6 +34,9 @@ const LogInForm = () => {
 
         <button type="submit">Log in</button>
       </form>
+      <button onClick={() => dispatch(getContactsThunk(token))}>
+        contacts
+      </button>
     </>
   );
 };

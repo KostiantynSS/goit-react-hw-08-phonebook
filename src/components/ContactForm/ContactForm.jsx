@@ -1,9 +1,11 @@
 import css from './contactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/slice/selectors';
-import { addThunk } from 'redux/slice/operations';
+import { selectContacts, selectToken } from 'redux/slice/selectors';
+// import { addThunk } from 'redux/slice/operations';
+import { addContactThunk } from 'redux/slice/test';
 
 const ContactForm = () => {
+  const token = useSelector(selectToken);
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
@@ -23,7 +25,8 @@ const ContactForm = () => {
       alert(`${data.name} is already in contacts.`);
       return;
     }
-    dispatch(addThunk(data));
+    dispatch(addContactThunk(token, data));
+    console.log(token, JSON.stringify(data));
     form.reset();
   };
 

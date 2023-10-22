@@ -1,23 +1,23 @@
 import { useDispatch } from 'react-redux';
-import css from './contactItem.module.css';
-import { deleteThunk } from 'redux/slice/operations';
+// import css from './contactItem.module.css';
+import { ListItem, ListItemText } from '@mui/material';
+
+// import { deleteThunk } from 'redux/slice/operations';
+import { deleteContactThunk } from 'redux/slice/auth';
 
 const ContactItem = ({ contact }) => {
   const dispatch = useDispatch();
 
   const deleteBtnHandler = () => {
-    dispatch(deleteThunk(contact.id));
+    dispatch(deleteContactThunk(contact.id));
   };
 
   return (
-    <li className={css.listItem}>
-      <p className={css.listItemP}>
-        {contact.name}: {contact.number}
-      </p>
-      <button className={css.listItemBtn} onClick={deleteBtnHandler}>
-        Delete
-      </button>
-    </li>
+    <ListItem>
+      <ListItemText primary={`${contact.name}: ${contact.number}`} />
+
+      <button onClick={deleteBtnHandler}>Delete</button>
+    </ListItem>
   );
 };
 

@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-export const selectContacts = state => state.contacts.items;
+export const selectContacts = state => state.user.contacts;
 export const selectFilter = state => state.filter;
 
 export const selectVisibleContacts = createSelector(
@@ -12,3 +12,4 @@ export const selectVisibleContacts = createSelector(
   }
 );
 export const selectToken = state => state.user.token;
+export const selectIsAuth = state => state.user.isAuth;

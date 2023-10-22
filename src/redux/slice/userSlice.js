@@ -4,6 +4,7 @@ import {
   logInThunk,
   getContactsThunk,
   addContactThunk,
+  deleteContactThunk,
 } from './auth';
 
 const handlePending = state => {
@@ -18,18 +19,31 @@ const handleRejected = (state, { payload }) => {
 const addUserFulfilled = (state, { payload }) => {
   state.isLoading = false;
   state.error = null;
-  state.token = payload;
+  state.token = payload.token;
+};
+const loginUserFulfilled = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = null;
+  state.token = payload.token;
   state.isAuth = true;
+  state.user = payload.user;
 };
 const addContactFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  state.contacts = action.payload;
+  state.contacts.unshift(action.payload);
 };
-
+const deleteContactFulfilled = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  state.contacts = state.contacts.filter(
+    contact => contact.id !== action.payload.id
+  );
+};
 const userSlice = createSlice({
   name: 'user',
   initialState: {
+    user: null,
     contacts: [],
     isLoading: false,
     isAuth: false,
@@ -45,16 +59,16 @@ const userSlice = createSlice({
         state.contacts = payload;
       })
       .addCase(addContactThunk.fulfilled, addContactFulfilled)
-      .addMatcher(
-        isAnyOf(getNewThunk.fulfilled, logInThunk.fulfilled),
-        addUserFulfilled
-      )
+      .addCase(getNewThunk.fulfilled, addUserFulfilled)
+      .addCase(logInThunk.fulfilled, loginUserFulfilled)
+      .addCase(deleteContactThunk.fulfilled, deleteContactFulfilled)
       .addMatcher(
         isAnyOf(
           getNewThunk.pending,
           logInThunk.pending,
           getContactsThunk.pending,
-          addContactThunk.pending
+          addContactThunk.pending,
+          deleteContactThunk.pending
         ),
         handlePending
       )
@@ -63,7 +77,8 @@ const userSlice = createSlice({
           getNewThunk.rejected,
           logInThunk.rejected,
           getContactsThunk.rejected,
-          addContactThunk.rejected
+          addContactThunk.rejected,
+          deleteContactThunk.rejected
         ),
         handleRejected
       );

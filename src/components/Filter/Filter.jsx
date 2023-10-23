@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import css from './filter.module.css';
+// import css from './filter.module.css';
 import { filterContacts } from 'redux/slice/filterSlice';
 import { selectFilter } from 'redux/slice/selectors';
+import { TextField } from '@mui/material';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -13,10 +14,11 @@ const Filter = () => {
   };
 
   return (
-    <input
+    <TextField
       id="filter"
-      className={css.input}
       type="text"
+      size="small"
+      variant="outlined"
       value={filter}
       onChange={changeFilter}
     />

@@ -1,7 +1,6 @@
-// import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 // import { useNavigate } from 'react-router-dom';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Container } from '@mui/material';
 
 import { getContactsThunk, logInThunk } from 'redux/slice/auth';
 // import { selectIsAuth } from 'redux/slice/selectors';
@@ -12,6 +11,7 @@ const LogInForm = () => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const handleSubmit = e => {
+    console.log(e);
     e.preventDefault();
     const form = e.target;
     const { password, email } = form;
@@ -21,17 +21,24 @@ const LogInForm = () => {
     };
     dispatch(logInThunk(data));
 
-    // form.reset();
+    form.reset();
   };
-  // useEffect(() => {
-  //   isAuth && navigate('/');
-  // }, [isAuth, navigate]);
+
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        {/* <label> */}
-        {/* Email */}
+    <Container>
+      {' '}
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          maxWidth: 'max-content',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          marginTop: '10px',
+        }}
+      >
         <TextField
+          size="small"
           id="email"
           label="email"
           variant="outlined"
@@ -39,11 +46,9 @@ const LogInForm = () => {
           name="email"
           required
         />
-        {/* <input type="email" name="email" required /> */}
-        {/* </label> */}
-        {/* <label> */}
-        {/* Password */}
+
         <TextField
+          size="small"
           id="password"
           label="password"
           variant="outlined"
@@ -51,17 +56,14 @@ const LogInForm = () => {
           name="password"
           required
         />
-        {/* <input type="password" name="password" required /> */}
-        {/* </label> */}
-
         <Button variant="contained" type="submit">
-          {/* Log in */}
+          login
         </Button>
       </form>
       <Button variant="contained" onClick={() => dispatch(getContactsThunk())}>
         contacts
       </Button>
-    </>
+    </Container>
   );
 };
 

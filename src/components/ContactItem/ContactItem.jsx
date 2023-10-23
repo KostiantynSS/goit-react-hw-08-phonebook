@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
 // import css from './contactItem.module.css';
-import { ListItem, ListItemText } from '@mui/material';
-import { DeleteForeverIcon } from '@mui/icons-material/';
+import { ListItem, ListItemText, Button } from '@mui/material';
+import { DeleteForever } from '@mui/icons-material';
+
 // import { deleteThunk } from 'redux/slice/operations';
 import { deleteContactThunk } from 'redux/slice/auth';
 
@@ -16,9 +17,9 @@ const ContactItem = ({ contact }) => {
     <ListItem>
       <ListItemText primary={`${contact.name}: ${contact.number}`} />
 
-      <button onClick={deleteBtnHandler}>
-        <DeleteForeverIcon />
-      </button>
+      <Button onClick={deleteBtnHandler}>
+        <DeleteForever />
+      </Button>
     </ListItem>
   );
 };

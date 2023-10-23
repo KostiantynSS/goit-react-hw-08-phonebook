@@ -1,3 +1,4 @@
+import { TextField, Button, Container } from '@mui/material';
 import { useDispatch } from 'react-redux';
 // import { selectContacts } from 'redux/slice/selectors';
 import { getNewThunk } from 'redux/slice/auth';
@@ -21,24 +22,52 @@ const SignUpForm = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name
-          <input type="text" name="name" required />
-        </label>
-        <label>
-          Email
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" required />
-        </label>
+    <Container>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          maxWidth: 'max-content',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          marginTop: '10px',
+        }}
+      >
+        <TextField
+          size="small"
+          id="name"
+          label="name"
+          variant="outlined"
+          type="text"
+          name="name"
+          required
+        />
 
-        <button type="submit">Sign up</button>
+        <TextField
+          size="small"
+          id="email"
+          label="email"
+          variant="outlined"
+          type="email"
+          name="email"
+          required
+        />
+
+        <TextField
+          size="small"
+          id="password"
+          label="password"
+          variant="outlined"
+          type="password"
+          name="password"
+          required
+        />
+
+        <Button type="submit" variant="contained">
+          Sign up
+        </Button>
       </form>
-    </>
+    </Container>
   );
 };
 

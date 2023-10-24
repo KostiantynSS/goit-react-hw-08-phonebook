@@ -1,6 +1,10 @@
 import { Outlet, NavLink } from 'react-router-dom';
 import css from './header.module.css';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from 'redux/slice/selectors';
+import UserMenu from 'components/UserMenu/UserMenu';
+import Navigation from './Navigation/Navigation';
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -10,22 +14,11 @@ const StyledLink = styled(NavLink)`
   }
 `;
 const Header = () => {
+  const isAuth = useSelector(selectIsAuth);
   return (
     <>
       <header className={css.header}>
-        <nav>
-          <ul className={css.nav}>
-            <li>
-              <StyledLink to={'/'}>Home</StyledLink>
-            </li>
-            <li>
-              <StyledLink to={'/register'}>Sign up</StyledLink>
-            </li>
-            <li>
-              <StyledLink to={'/login'}>Log in</StyledLink>
-            </li>
-          </ul>
-        </nav>
+        <Navigation />
       </header>
 
       <Outlet />

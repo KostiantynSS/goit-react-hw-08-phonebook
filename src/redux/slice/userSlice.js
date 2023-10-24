@@ -5,6 +5,8 @@ import {
   getContactsThunk,
   addContactThunk,
   deleteContactThunk,
+  logOutThunk,
+  refreshThunk,
 } from './auth';
 
 const handlePending = state => {
@@ -28,6 +30,18 @@ const loginUserFulfilled = (state, { payload }) => {
   state.isAuth = true;
   state.user = payload.user;
 };
+const logOutUserFulfilled = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = null;
+  state.token = '';
+  state.isAuth = false;
+  state.user = null;
+  state.contacts = [];
+};
+const refreshUserFulfilled = (state, { payload }) => {
+  state.user = payload;
+};
+
 const addContactFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
@@ -58,9 +72,12 @@ const userSlice = createSlice({
         state.error = null;
         state.contacts = payload;
       })
+
       .addCase(addContactThunk.fulfilled, addContactFulfilled)
       .addCase(getNewThunk.fulfilled, addUserFulfilled)
       .addCase(logInThunk.fulfilled, loginUserFulfilled)
+      .addCase(logOutThunk.fulfilled, logOutUserFulfilled)
+      .addCase(refreshThunk.fulfilled, refreshUserFulfilled)
       .addCase(deleteContactThunk.fulfilled, deleteContactFulfilled)
       .addMatcher(
         isAnyOf(
@@ -68,7 +85,9 @@ const userSlice = createSlice({
           logInThunk.pending,
           getContactsThunk.pending,
           addContactThunk.pending,
-          deleteContactThunk.pending
+          deleteContactThunk.pending,
+          logOutThunk.pending,
+          refreshThunk.pending
         ),
         handlePending
       )
@@ -78,7 +97,9 @@ const userSlice = createSlice({
           logInThunk.rejected,
           getContactsThunk.rejected,
           addContactThunk.rejected,
-          deleteContactThunk.rejected
+          deleteContactThunk.rejected,
+          logOutThunk.rejected,
+          refreshThunk.rejected
         ),
         handleRejected
       );

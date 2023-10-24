@@ -8,7 +8,7 @@ const instance = axios.create({
 // instance.defaults.headers.common['Authorization'] =
 //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMyYjE4MGU4YWY1ZjAwMTQ3M2Q2MGUiLCJpYXQiOjE2OTc5MTQzNDJ9.qigwkppBwe9FHPFCyKSpVKVQTfHHkpir0t6gxUk76Eo';
 export const setToken = token => {
-  instance.defaults.headers.common['Authorization'] = token;
+  instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 // const token = JSON.parse(localStorage.getItem('persist:user'));
 // const parsedToken = JSON.parse(token?.user);
@@ -39,6 +39,36 @@ export const logInThunk = createAsyncThunk(
       setToken(data.token);
       console.log(data);
       return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+export const logOutThunk = createAsyncThunk(
+  'user/logOut',
+  async (_, thunkAPI) => {
+    try {
+      const response = await instance.post('/users/logout');
+
+      console.log(response);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+export const refreshThunk = createAsyncThunk(
+  'user/refresh',
+  async (_, thunkAPI) => {
+    try {
+      // console.log(data);
+      // return data;
+
+      const { user } = thunkAPI.getState();
+      if (user.token) {
+        setToken(user.token);
+        const { data } = await instance('/users/current');
+        console.log(data);
+      }
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

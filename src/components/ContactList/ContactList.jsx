@@ -18,7 +18,7 @@ const ContactList = () => {
     <>
       {isLoading && !error && <b>Request in progress...</b>}
       {error && <p>{error}</p>}
-      <List>
+      <List sx={{ maxWidth: 400 }}>
         {items.map(contact => (
           <ContactItem contact={contact} key={contact.id} />
         ))}

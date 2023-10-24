@@ -64,10 +64,13 @@ export const refreshThunk = createAsyncThunk(
       // return data;
 
       const { user } = thunkAPI.getState();
+      console.log(user);
       if (user.token) {
         setToken(user.token);
         const { data } = await instance('/users/current');
         console.log(data);
+        console.log(user);
+        return data;
       }
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 // import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Container } from '@mui/material';
 
-import { getContactsThunk, logInThunk } from 'redux/slice/auth';
+import { logInThunk } from 'redux/slice/auth';
 // import { selectIsAuth } from 'redux/slice/selectors';
 // import { useSelector } from 'react-redux';
 
@@ -60,9 +60,6 @@ const LogInForm = () => {
           login
         </Button>
       </form>
-      <Button variant="contained" onClick={() => dispatch(getContactsThunk())}>
-        contacts
-      </Button>
     </Container>
   );
 };

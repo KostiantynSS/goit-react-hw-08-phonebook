@@ -69,6 +69,9 @@ export const getContactsThunk = createAsyncThunk(
   'user/contacts',
   async (_, thunkAPI) => {
     try {
+      const { user } = thunkAPI.getState();
+      setToken(user.token);
+
       const { data } = await instance('/contacts');
 
       return data;

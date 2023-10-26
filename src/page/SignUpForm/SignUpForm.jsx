@@ -1,15 +1,10 @@
 import { TextField, Button, Container } from '@mui/material';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
-import { getNewThunk } from 'redux/slice/auth';
-import { selectIsAuth } from 'redux/slice/selectors';
+import { useDispatch } from 'react-redux';
+import { getNewThunk } from 'redux/auth';
 
 const SignUpForm = () => {
-  const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
@@ -21,9 +16,7 @@ const SignUpForm = () => {
     };
     dispatch(getNewThunk(data));
   };
-  useEffect(() => {
-    isAuth && navigate('/contacts');
-  }, [isAuth, navigate]);
+
   return (
     <Container sx={{ width: 'fit-content' }}>
       <form

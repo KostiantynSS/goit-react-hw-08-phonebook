@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import ContactForm from '../../components/ContactForm/ContactForm';
 import ContactList from '../../components/ContactList/ContactList';
 import Filter from '../../components/Filter/Filter';
@@ -5,9 +6,13 @@ import Filter from '../../components/Filter/Filter';
 const Phonebook = () => {
   return (
     <>
-      <h1>Phonebook</h1>
+      <Typography variant="h1" fontSize={'3em'} mt={'15px'}>
+        Phonebook
+      </Typography>
       <ContactForm />
-      <h2>Contacts</h2>
+      <Typography variant="h2" fontSize={'3em'} mt={'15px'}>
+        Contacts
+      </Typography>
       <Filter />
       <ContactList />{' '}
     </>

@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import css from './header.module.css';
-import Navigation from './Navigation/Navigation';
+import Navigation from 'components/Navigation/Navigation';
 
 const Header = () => {
   return (
@@ -8,7 +8,6 @@ const Header = () => {
       <header className={css.header}>
         <Navigation />
       </header>
-
       <Outlet />
     </>
   );

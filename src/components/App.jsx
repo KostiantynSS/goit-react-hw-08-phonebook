@@ -1,30 +1,33 @@
-import Phonebook from 'page/Phonebook/Phonebook';
-import Header from './Header/Header';
-import SignUpForm from 'page/SignUpForm/SignUpForm';
 import { Routes, Route } from 'react-router-dom';
-import LogInForm from './LogInForm/LogInForm';
 import { useDispatch } from 'react-redux';
-
-import { useEffect } from 'react';
-import { refreshThunk } from 'redux/slice/auth';
+import { Suspense, lazy, useEffect } from 'react';
+import { refreshThunk } from 'redux/auth';
+import Header from './Header/Header';
 import PrivateRoute from './guards/PrivateRoute/PrivateRoute';
+import PublicRoute from './guards/PublicRoute/PublicRoute';
+import WellcomePage from './WellcomePage/WellcomePage';
+
+const SignUpForm = lazy(() => import('../page/SignUpForm/SignUpForm'));
+const LogInForm = lazy(() => import('../page/LogInForm/LogInForm'));
+const Phonebook = lazy(() => import('page/Phonebook/Phonebook'));
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(refreshThunk());
   }, [dispatch]);
+
   return (
-    <>
+    <Suspense fallback={'Loading...'}>
       <Routes>
         <Route path="/" element={<Header />}>
           <Route
             index
             element={
-              <h1 style={{ marginTop: 15, textAlign: 'center' }}>
-                Wellcome to Phonebook. <br />
-                Please, sign up or login to continue.
-              </h1>
+              <PublicRoute>
+                <WellcomePage />
+              </PublicRoute>
             }
           />
           <Route
@@ -35,11 +38,25 @@ const App = () => {
               </PrivateRoute>
             }
           ></Route>
-          <Route path="/register" element={<SignUpForm />} />
-          <Route path="/login" element={<LogInForm />} />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <SignUpForm />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <LogInForm />
+              </PublicRoute>
+            }
+          />
         </Route>
       </Routes>
-    </>
+    </Suspense>
   );
 };
 

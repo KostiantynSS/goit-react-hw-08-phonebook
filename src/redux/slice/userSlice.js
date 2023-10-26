@@ -7,7 +7,7 @@ import {
   deleteContactThunk,
   logOutThunk,
   refreshThunk,
-} from './auth';
+} from '../auth';
 
 const handlePending = state => {
   state.isLoading = true;

@@ -1,10 +1,7 @@
 import { useDispatch } from 'react-redux';
-// import css from './contactItem.module.css';
 import { ListItem, ListItemText, Button } from '@mui/material';
 import { DeleteForever } from '@mui/icons-material';
-
-// import { deleteThunk } from 'redux/slice/operations';
-import { deleteContactThunk } from 'redux/slice/auth';
+import { deleteContactThunk } from 'redux/auth';
 
 const ContactItem = ({ contact }) => {
   const dispatch = useDispatch();

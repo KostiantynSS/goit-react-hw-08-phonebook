@@ -1,20 +1,11 @@
 import { useDispatch } from 'react-redux';
-
 import { Button, TextField, Container } from '@mui/material';
-
-import { logInThunk } from 'redux/slice/auth';
-import { useNavigate } from 'react-router-dom';
-
-import { useEffect } from 'react';
-import { selectIsAuth } from 'redux/slice/selectors';
-import { useSelector } from 'react-redux';
+import { logInThunk } from 'redux/auth';
 
 const LogInForm = () => {
-  const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const handleSubmit = e => {
-    console.log(e);
     e.preventDefault();
     const form = e.target;
     const { password, email } = form;
@@ -23,15 +14,11 @@ const LogInForm = () => {
       password: password.value,
     };
     dispatch(logInThunk(data));
-
     form.reset();
   };
-  useEffect(() => {
-    isAuth && navigate('/contacts');
-  }, [isAuth, navigate]);
+
   return (
     <Container sx={{ width: 'fit-content' }}>
-      {' '}
       <form
         onSubmit={handleSubmit}
         style={{

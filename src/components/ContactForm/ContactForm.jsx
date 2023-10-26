@@ -1,7 +1,6 @@
-// import css from './contactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/slice/selectors';
-import { addContactThunk } from 'redux/slice/auth';
+import { selectContacts } from 'redux/selectors';
+import { addContactThunk } from 'redux/auth';
 import { Button, Container, TextField } from '@mui/material';
 
 const ContactForm = () => {

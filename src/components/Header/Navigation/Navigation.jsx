@@ -9,7 +9,7 @@ const StyledLink = styled(NavLink)`
   color: black;
 
   &.active {
-    color: #f22613;
+    color: #1976d2;
   }
 `;
 
@@ -17,7 +17,7 @@ const Navigation = () => {
   const isAuth = useSelector(selectIsAuth);
   return (
     <nav className={css.nav}>
-      <StyledLink to={'/'}>Phonebook</StyledLink>
+      <StyledLink to={'/contacts'}>Phonebook</StyledLink>
       {isAuth ? (
         <UserMenu />
       ) : (

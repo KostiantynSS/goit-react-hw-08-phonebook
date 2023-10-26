@@ -22,6 +22,7 @@ const addUserFulfilled = (state, { payload }) => {
   state.isLoading = false;
   state.error = null;
   state.token = payload.token;
+  state.isAuth = true;
 };
 const loginUserFulfilled = (state, { payload }) => {
   state.isLoading = false;
@@ -40,6 +41,8 @@ const logOutUserFulfilled = (state, { payload }) => {
 };
 const refreshUserFulfilled = (state, { payload }) => {
   state.user = payload;
+  state.isAuth = true;
+  state.isLoading = false;
 };
 
 const addContactFulfilled = (state, action) => {

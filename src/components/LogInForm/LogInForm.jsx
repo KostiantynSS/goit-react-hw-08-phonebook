@@ -1,15 +1,18 @@
 import { useDispatch } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+
 import { Button, TextField, Container } from '@mui/material';
 
 import { logInThunk } from 'redux/slice/auth';
-// import { selectIsAuth } from 'redux/slice/selectors';
-// import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { useEffect } from 'react';
+import { selectIsAuth } from 'redux/slice/selectors';
+import { useSelector } from 'react-redux';
 
 const LogInForm = () => {
-  // const isAuth = useSelector(selectIsAuth);
+  const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleSubmit = e => {
     console.log(e);
     e.preventDefault();
@@ -23,9 +26,11 @@ const LogInForm = () => {
 
     form.reset();
   };
-
+  useEffect(() => {
+    isAuth && navigate('/contacts');
+  }, [isAuth, navigate]);
   return (
-    <Container>
+    <Container sx={{ width: 'fit-content' }}>
       {' '}
       <form
         onSubmit={handleSubmit}

@@ -7,9 +7,21 @@ const UserMenu = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   return (
-    <Box sx={{ display: 'flex' }}>
-      <p>{user?.email}</p>
-      <Button variant="contained" onClick={() => dispatch(logOutThunk())}>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <p style={{ margin: '0px 15px 0px 0px', display: 'block' }}>
+        {user?.email}
+      </p>
+      <Button
+        variant="contained"
+        size="medium"
+        sx={{ height: '50%' }}
+        onClick={() => dispatch(logOutThunk())}
+      >
         Logout
       </Button>
     </Box>

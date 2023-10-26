@@ -1,12 +1,15 @@
 import { TextField, Button, Container } from '@mui/material';
-import { useDispatch } from 'react-redux';
-// import { selectContacts } from 'redux/slice/selectors';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { getNewThunk } from 'redux/slice/auth';
+import { selectIsAuth } from 'redux/slice/selectors';
 
 const SignUpForm = () => {
-  //   const contacts = useSelector(selectContacts);
+  const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
@@ -17,12 +20,12 @@ const SignUpForm = () => {
       password: password.value,
     };
     dispatch(getNewThunk(data));
-
-    // form.reset();
   };
-
+  useEffect(() => {
+    isAuth && navigate('/contacts');
+  }, [isAuth, navigate]);
   return (
-    <Container>
+    <Container sx={{ width: 'fit-content' }}>
       <form
         onSubmit={handleSubmit}
         style={{

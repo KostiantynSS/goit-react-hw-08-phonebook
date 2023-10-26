@@ -6,20 +6,26 @@ import LogInForm from './LogInForm/LogInForm';
 import { useDispatch } from 'react-redux';
 
 import { useEffect } from 'react';
-import { getContactsThunk, refreshThunk } from 'redux/slice/auth';
+import { refreshThunk } from 'redux/slice/auth';
+import PrivateRoute from './guards/PrivateRoute/PrivateRoute';
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(refreshThunk());
-    dispatch(getContactsThunk());
   }, [dispatch]);
   return (
     <>
       <Routes>
         <Route path="/" element={<Header />}>
-          {' '}
-          <Route index element={<Phonebook />}></Route>
+          <Route
+            path="contacts"
+            element={
+              <PrivateRoute>
+                <Phonebook />
+              </PrivateRoute>
+            }
+          ></Route>
           <Route path="/register" element={<SignUpForm />} />
           <Route path="/login" element={<LogInForm />} />
         </Route>

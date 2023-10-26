@@ -42,7 +42,7 @@ export const logOutThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await instance.post('/users/logout');
-      console.log(response);
+      return response;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -53,7 +53,7 @@ export const refreshThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { user } = thunkAPI.getState();
-      console.log(user.token);
+
       if (user.token) {
         setToken(user.token);
         const { data } = await instance('/users/current');

@@ -19,6 +19,15 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Header />}>
           <Route
+            index
+            element={
+              <h1 style={{ marginTop: 15, textAlign: 'center' }}>
+                Wellcome to Phonebook. <br />
+                Please, sign up or login to continue.
+              </h1>
+            }
+          />
+          <Route
             path="contacts"
             element={
               <PrivateRoute>

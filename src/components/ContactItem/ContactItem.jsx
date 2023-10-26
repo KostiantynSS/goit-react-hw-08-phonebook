@@ -11,7 +11,7 @@ const ContactItem = ({ contact }) => {
   };
 
   return (
-    <ListItem>
+    <ListItem sx={{ padding: 0 }}>
       <ListItemText primary={`${contact.name}: ${contact.number}`} />
 
       <Button onClick={deleteBtnHandler}>
